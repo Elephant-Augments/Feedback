@@ -1,31 +1,102 @@
----
-name: Bug Report
-about: Let us know what's broken
-title: "[Bug]"
-labels: ":no_entry:  bug"
-assignees: ''
+name: Issue Report
+description: Report a bug or unexpected behavior.
+title: "[Bug]: "
+labels: ["bug"]
 
----
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting an issue.
 
-## Describe The Bug*
-A clear and concise description of what the bug is.
+        ⚠ Notes:
+        - Minecraft **1.21.1 requires Java 21**
+        - Unsupported versions will be closed
 
-## To Reproduce*
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+  - type: checkboxes
+    id: has_tested_minimal_instance
+    attributes:
+      label: Minimal Instance Test
+      description: Does the issue still happen with only this mod and its dependencies?
+      options:
+        - label: Yes, I've tested on a minimal instance.
+          required: false
 
-## Expected Behavior*
-A clear and concise description of what you expected to happen.
+  - type: checkboxes
+    id: has_checked_for_similar_issues
+    attributes:
+      label: Similar Issues
+      description: Please check if this issue was already reported.
+      options:
+        - label: Yes, I have checked for similar issues.
+          required: false
 
-## Versions*
- - Pack:
- - Shader (if applicable):
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Fabric
+        - NeoForge
+    validations:
+      required: true
 
-## Screenshots
-If applicable, add screenshots to help explain your problem.
+  - type: dropdown
+    id: minecraft_version
+    attributes:
+      label: Minecraft Version
+      options:
+        - "1.21.1"
+    validations:
+      required: true
 
-## Additional Context
-Add any other context about the problem here.
+  - type: dropdown
+    id: mod
+    attributes:
+      label: Modpack/Mod
+      options:
+        - Project Chobani Modpack
+    validations:
+      required: true
+
+  - type: input
+    id: mod_version
+    attributes:
+      label: Mod Version
+      placeholder: e.g. 1.5.3
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue Description
+      placeholder: What happened? What went wrong?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: false
+
+  - type: input
+    id: logs
+    attributes:
+      label: Logs
+      description: Upload logs via https://mclo.gs and paste the link.
+      placeholder: https://mclo.gs/abcdef
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots (optional)
+      description: Drag & drop images or paste crash snippets here.
