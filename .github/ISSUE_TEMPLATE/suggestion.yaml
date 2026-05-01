@@ -19,12 +19,3 @@ body:
       placeholder: Any related mods or references we should know about?
     validations:
       required: false
-
-  - type: input
-    id: logs
-    attributes:
-      label: Logs
-      description: Upload logs via https://mclo.gs and paste the link.
-      placeholder: https://mclo.gs/abcdef
-    validations:
-      required: false
