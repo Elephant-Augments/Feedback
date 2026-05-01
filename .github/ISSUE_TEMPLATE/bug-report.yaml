@@ -56,6 +56,17 @@ body:
       label: Modpack/Mod
       options:
         - Project Chobani Modpack
+        - Create Fuel Tank
+        - Fish Patty
+        - Nifty Ships
+        - Party Up!
+        - Project Artisan
+        - Project Evergreen
+        - Project Odyssey
+        - Sophisticated Memory
+        - Temporal Timelines
+        - Villager Quests
+        - Waystop
     validations:
       required: true
 
