@@ -4,6 +4,25 @@ title: "[Suggestion] "
 labels: [":sparkles:  enhancement"]
 type: feature
 body:
+  - type: dropdown
+    id: mod
+    attributes:
+      label: Modpack/Mod
+      options:
+        - Project Chobani Modpack
+        - Create Fuel Tank
+        - Fish Patty
+        - Nifty Ships
+        - Party Up!
+        - Project Artisan
+        - Project Evergreen
+        - Project Odyssey
+        - Sophisticated Memory
+        - Temporal Timelines
+        - Villager Quests
+        - Waystop
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:
