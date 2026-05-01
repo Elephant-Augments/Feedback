@@ -1,6 +1,6 @@
 ---
-name: Issue Report
-description: Report a bug or unexpected behavior.
+name: Bug Report
+about: Report a critical bug.
 title: "[Bug]: "
 labels: ["bug"]
 ---
