@@ -1,0 +1,12 @@
+name: Nitpick
+description: Polish tweaks and other inconveniences that are too small to be labeled bugs.
+title: "[Nitpick] "
+type: polish
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      placeholder: A short description of the problem.
+    validations:
+      required: true
