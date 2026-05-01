@@ -3,6 +3,8 @@ description: Polish tweaks and other inconveniences that are too small to be lab
 title: "[Nitpick] "
 labels: [":space_invader: nitpick"]
 type: polish
+assignees:
+  - Desymoo
 body:
 
   - type: dropdown
