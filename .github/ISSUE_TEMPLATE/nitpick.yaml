@@ -1,6 +1,7 @@
 name: Nitpick
 description: Polish tweaks and other inconveniences that are too small to be labeled bugs.
 title: "[Nitpick] "
+labels: [":space_invader: nitpick"]
 type: polish
 body:
   - type: textarea
