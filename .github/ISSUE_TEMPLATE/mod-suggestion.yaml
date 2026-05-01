@@ -1,0 +1,30 @@
+name: Suggestion
+description: Suggest a new feature or other mod alteration.
+title: "[Suggestion] "
+labels: ["suggestion"]
+type: feature
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      placeholder: Describe the new feature or alteration in detail.
+    validations:
+      required: true
+
+  - type: textarea
+    id: related_context
+    attributes:
+      label: Related Context
+      placeholder: Any related mods or references we should know about?
+    validations:
+      required: false
+
+  - type: input
+    id: logs
+    attributes:
+      label: Logs
+      description: Upload logs via https://mclo.gs and paste the link.
+      placeholder: https://mclo.gs/abcdef
+    validations:
+      required: false
