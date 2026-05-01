@@ -4,6 +4,8 @@ title: "[Bug] "
 labels: [":no_entry:  bug"]
 projects: ["Project Chobani"]
 type: bug
+assignees:
+  - Ryan-Siegrane
 body:
   - type: markdown
     attributes:
