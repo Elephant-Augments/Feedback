@@ -1,4 +1,4 @@
-name: Auto-Assign Milestone
+name: Auto-assign Milestone
 
 on:
   issues:
@@ -10,24 +10,22 @@ jobs:
     permissions:
       issues: write
     steps:
-      - name: Extract mod from issue body
-        id: extract_mod
-        run: |
-          BODY='${{ github.event.issue.body }}'
-          MOD=$(echo "$BODY" | grep '^mod:' | cut -d' ' -f2-)
-          echo "mod=$MOD" >> $GITHUB_OUTPUT
-
-      - name: Create milestone if none exists
-        id: milestone
+      - name: Extract mod and assign milestone
         uses: actions/github-script@v7
         with:
           script: |
-            const mod = '${{ steps.extract_mod.outputs.mod }}';
+            const body = context.payload.issue.body || '';
+            
+            // Extract mod value from YAML format
+            const modMatch = body.match(/^mod:\s*(.+)$/m);
+            const mod = modMatch ? modMatch[1].trim() : null;
             
             if (!mod) {
               console.log('No mod found in issue body');
               return;
             }
+            
+            console.log(`Found mod: ${mod}`);
             
             // List existing milestones
             const milestones = await github.rest.issues.listMilestones({
@@ -52,17 +50,11 @@ jobs:
               console.log(`Milestone already exists: ${mod}`);
             }
             
-            core.setOutput('milestone_number', milestone.number);
-
-      - name: Assign issue to milestone
-        if: steps.milestone.outputs.milestone_number
-        uses: actions/github-script@v7
-        with:
-          script: |
+            // Assign issue to milestone
             await github.rest.issues.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              milestone: ${{ steps.milestone.outputs.milestone_number }}
+              milestone: milestone.number
             });
-            console.log('Issue assigned to milestone');
+            console.log(`Issue assigned to milestone: ${mod}`);
