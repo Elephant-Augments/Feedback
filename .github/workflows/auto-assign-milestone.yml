@@ -1,0 +1,68 @@
+name: Auto-Assign Milestone
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  assign-milestone:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Extract mod from issue body
+        id: extract_mod
+        run: |
+          BODY='${{ github.event.issue.body }}'
+          MOD=$(echo "$BODY" | grep '^mod:' | cut -d' ' -f2-)
+          echo "mod=$MOD" >> $GITHUB_OUTPUT
+
+      - name: Create milestone if none exists
+        id: milestone
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const mod = '${{ steps.extract_mod.outputs.mod }}';
+            
+            if (!mod) {
+              console.log('No mod found in issue body');
+              return;
+            }
+            
+            // List existing milestones
+            const milestones = await github.rest.issues.listMilestones({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all'
+            });
+            
+            // Check if milestone exists
+            let milestone = milestones.data.find(m => m.title === mod);
+            
+            // Create milestone if it doesn't exist
+            if (!milestone) {
+              console.log(`Creating milestone: ${mod}`);
+              const newMilestone = await github.rest.issues.createMilestone({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: mod
+              });
+              milestone = newMilestone.data;
+            } else {
+              console.log(`Milestone already exists: ${mod}`);
+            }
+            
+            core.setOutput('milestone_number', milestone.number);
+
+      - name: Assign issue to milestone
+        if: steps.milestone.outputs.milestone_number
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              milestone: ${{ steps.milestone.outputs.milestone_number }}
+            });
+            console.log('Issue assigned to milestone');
