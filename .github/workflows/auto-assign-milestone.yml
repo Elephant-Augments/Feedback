@@ -16,9 +16,20 @@ jobs:
           script: |
             const body = context.payload.issue.body || '';
             
-            // Extract mod value from YAML format
-            const modMatch = body.match(/^mod:\s*(.+)$/m);
-            const mod = modMatch ? modMatch[1].trim() : null;
+            // Split body into lines and trim whitespace
+            const lines = body.split('\n').map(line => line.trim());
+            
+            // Find the index of the Modpack/Mod heading
+            const headingIndex = lines.findIndex(line => line === '### Modpack/Mod');
+            
+            let mod = null;
+            if (headingIndex !== -1 && headingIndex + 1 < lines.length) {
+              // The next non-empty line should be the selected value
+              const nextLine = lines[headingIndex + 1];
+              if (nextLine && nextLine !== '') {
+                mod = nextLine;
+              }
+            }
             
             if (!mod) {
               console.log('No mod found in issue body');
