@@ -17,15 +17,6 @@ body:
         - Unsupported versions will be closed
 
   - type: checkboxes
-    id: has_tested_minimal_instance
-    attributes:
-      label: Minimal Instance Test
-      description: Does the issue still happen with only this mod and its dependencies?
-      options:
-        - label: Yes, I've tested on a minimal instance.
-          required: false
-
-  - type: checkboxes
     id: has_checked_for_similar_issues
     attributes:
       label: Similar Issues
@@ -33,24 +24,6 @@ body:
       options:
         - label: Yes, I have checked for similar issues.
           required: false
-
-  - type: dropdown
-    id: platform
-    attributes:
-      label: Platform
-      options:
-        - NeoForge
-    validations:
-      required: true
-
-  - type: dropdown
-    id: minecraft_version
-    attributes:
-      label: Minecraft Version
-      options:
-        - "1.21.1"
-    validations:
-      required: true
 
   - type: dropdown
     id: mod
