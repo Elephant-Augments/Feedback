@@ -2,6 +2,8 @@ name: Bug Report
 description: Report a critical bug.
 title: "[Bug] "
 labels: [":no_entry:  bug"]
+projects: ["Project Chobani"]
+type: bug
 assignees:
   - Ryan-Siegrane
 body:
