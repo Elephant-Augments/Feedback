@@ -1,5 +1,6 @@
 name: Debug Issue Payload
 on:
+  workflow_dispatch:
   issues:
     types: [opened]
 
