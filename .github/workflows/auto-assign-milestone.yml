@@ -1,8 +1,8 @@
 name: Auto-assign Milestone
 
 on:
-  issues:
-    types: [opened]
+  issue_form:
+    types: [submitted]
 
 jobs:
   assign-milestone:
