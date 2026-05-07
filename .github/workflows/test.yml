@@ -1,0 +1,22 @@
+name: Debug Issue Payload
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || '';
+
+            console.log('=== FULL CONTEXT PAYLOAD ===');
+            console.log(JSON.stringify(context.payload, null, 2));
+
+            console.log('\n=== ISSUE BODY ===');
+            console.log(body);
+
+            console.log('\n=== ISSUE OBJECT ===');
+            console.log(JSON.stringify(context.issue, null, 2));
